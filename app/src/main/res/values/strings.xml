@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NoticeBoard</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Title</string>
+    <string name="notice_details">Notice Details</string>
+    <string name="add_notice_details">ADD NOTICE DETAILS</string>
+    <string name="prof_signature">Prof.Signature</string>
+    <string name="department">Department</string>
+    <string name="done">Done</string>
+    <string name="enter_notice_details">Enter Notice Details</string>
+</resources>

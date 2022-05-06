@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="15dp"
+    tools:context=".fragments.CreateNotice">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/questrial"
+        android:text="@string/enter_notice_details"
+        android:textColor="#3A265E"
+        android:textSize="23sp" />
+
+    <EditText
+
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"
+        android:background="@drawable/border"
+        android:hint="@string/title"
+        android:textColorHint="@color/hint"
+        android:layout_margin="10dp"
+        android:singleLine="true"
+
+        />
+    <EditText
+
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="120sp"
+        android:background="@drawable/border"
+        android:hint="@string/notice_details"
+        android:textColorHint="@color/hint"
+        android:gravity="top|start"
+        android:paddingTop="12dp"
+        android:layout_margin="10dp"
+        android:singleLine="true"
+
+        />
+
+    <EditText
+
+        android:id="@+id/department"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"
+        android:background="@drawable/border"
+        android:hint="@string/department"
+        android:textColorHint="@color/hint"
+        android:layout_margin="10dp"
+        android:singleLine="true"
+
+        />
+    <EditText
+
+        android:id="@+id/signature"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"
+        android:background="@drawable/border"
+        android:hint="@string/prof_signature"
+        android:textColorHint="@color/hint"
+        android:layout_margin="10dp"
+        android:singleLine="true"
+        />
+   <TextView
+       android:id="@+id/Done"
+       android:layout_width="120dp"
+       android:layout_height="50dp"
+       android:layout_margin="20dp"
+       android:background="@drawable/buttonbackground"
+       android:layout_gravity="center"
+       android:textColor="@color/white"
+       android:textSize="20sp"
+       android:gravity="center"
+       android:text="@string/done"/>
+
+</LinearLayout>
