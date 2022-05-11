@@ -48,7 +48,7 @@ class CreateNotice : Fragment() {
                 mBinding.signature.text.clear()
 
 
-                Toast.makeText(context, "state Ok", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Data has been successfully", Toast.LENGTH_LONG).show()
 
             }.addOnFailureListener {
 

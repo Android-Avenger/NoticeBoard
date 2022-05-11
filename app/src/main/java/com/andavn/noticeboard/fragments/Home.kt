@@ -1,7 +1,9 @@
 package com.andavn.noticeboard.fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,8 +25,9 @@ import com.google.firebase.ktx.Firebase
 
 class Home : Fragment() {
 
+
     lateinit var mBinding: FragmentHomeBinding
-    var array = mutableListOf<NoticeModel>()
+    lateinit var notice:ArrayList<NoticeModel>
     lateinit var databaseReference: DatabaseReference
 
 
@@ -35,68 +38,54 @@ class Home : Fragment() {
 
         mBinding = FragmentHomeBinding.inflate(layoutInflater)
 
-        databaseReference = Firebase.database.getReference("Notice")
+        notice = arrayListOf<NoticeModel>()
 
-
-        databaseReference.addValueEventListener(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                     val notice = snapshot.getValue<NoticeModel>()
-
-                      notice?.let { array.add(it) }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-                Log.d("test",error.message)
-            }
-        })
-
-        val adapter = Adapter()
         mBinding.recyclerView.layoutManager = LinearLayoutManager(context)
-        mBinding.recyclerView.adapter = adapter
-        adapter.setData(array)
+
+
+        getNoticeModel()
+
         mBinding.add.setOnClickListener {
             findNavController().navigate(R.id.createNotice)
         }
         return (mBinding.root)
     }
 
- //   fun showNotice(database: DatabaseReference) {
 
-//        val dataChanged = object : ValueEventListener {
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//
-//                val notice = snapshot.getValue<NoticeModel>(NoticeModel::class.java)
-//
-//                if (notice != null) {
-//
-//                    array.add(notice)
-//
-//                }
-//
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                Toast.makeText(context, error.toException().toString(), Toast.LENGTH_LONG)
-//                    .show()
-//            }
-//
-//        }
-//        database.addValueEventListener(dataChanged)
-//    }
+    private fun getNoticeModel() {
+
+        databaseReference = Firebase.database.getReference("Notice")
+
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            lateinit var data:NoticeModel
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists())
+
+                    for (notices in snapshot.children) {
+
+                        var notic = snapshot.getValue(NoticeModel::class.java)
+
+                        data.department = notic!!.department
+                        data.title = notic!!.title
+                        data.noticeDescription = notic!!.noticeDescription
+                        data.profSignature = notic!!.profSignature
+
+                        notice.add(data)
+
+                        Toast.makeText(context,notice[0].department,Toast.LENGTH_LONG).show()
+
+                    }
+                mBinding.recyclerView.adapter = Adapter(notice)
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+                Toast.makeText(context, error.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
 
 }
-
-/*
-* ref.addValueEventListener(new ValueEventListener() {
-  @Override
-  public void onDataChange(DataSnapshot dataSnapshot) {
-    NoticeModel notice = dataSnapshot.getValue(NoticeModel.class);
-    System.out.println(post);
-  }*/
-
-

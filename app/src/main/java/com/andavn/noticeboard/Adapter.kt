@@ -1,38 +1,41 @@
 package com.andavn.noticeboard
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andavn.noticeboard.databinding.NoticeBoardItemBinding
 
-class Adapter:RecyclerView.Adapter<CustomViewHolder>() {
-
-    lateinit var list:MutableList<NoticeModel>
+class Adapter(private val model: MutableList<NoticeModel>) :
+    RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
 
-        return CustomViewHolder(NoticeBoardItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return CustomViewHolder(
+            NoticeBoardItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
-        holder.binding.title.text = list[position].title
-        holder.binding.department.text = list[position].department
-        holder.binding.description.text = list[position].noticeDescription
-        holder.binding.signature.text = list[position].profSignature
+        holder.binding.title.text = model[position].title
+        holder.binding.department.text = model[position].department
+        holder.binding.description.text = model[position].noticeDescription
+        holder.binding.signature.text = model[position].profSignature
 
     }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount(): Int {
 
-    fun setData(nList:MutableList<NoticeModel>){
-
-        this.list = nList
-
-        notifyDataSetChanged()
-
+        return model.size
     }
+
 }
 
-class CustomViewHolder(val binding: NoticeBoardItemBinding):RecyclerView.ViewHolder(binding.root) {
+class CustomViewHolder(val binding: NoticeBoardItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
 }
